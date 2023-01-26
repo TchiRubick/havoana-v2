@@ -1,9 +1,11 @@
+import React from "react";
 import { type NextPage } from "next";
+
 
 const Home: NextPage = () => {
 
   return (
-    <>
+    <div>
       <div>
         <button>
           Google
@@ -14,7 +16,7 @@ const Home: NextPage = () => {
           Facebook
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
