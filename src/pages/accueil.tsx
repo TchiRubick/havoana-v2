@@ -37,7 +37,7 @@ const Accueil: NextPage = () => {
    </div>
  </nav>
  <div className="mt-96">
-    copyright
+    copyright 2023
  </div>
   
 </div>
