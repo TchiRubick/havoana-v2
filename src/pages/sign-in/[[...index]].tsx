@@ -6,7 +6,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">
-      <SignIn path="/signin" signUpUrl="/signup" redirectUrl="/dashboard" />
+      <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" redirectUrl="/" />
     </div>
   );
 };
