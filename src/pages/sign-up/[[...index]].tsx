@@ -1,12 +1,12 @@
 import React from "react";
 import { type NextPage } from "next";
-import { SignUp } from "@clerk/nextjs";
+import { SignUp  } from "@clerk/nextjs";
 
 const Home: NextPage = () => {
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">
-      <SignUp path="/signup" signInUrl="/signin" redirectUrl="/dashboard" />
+      <SignUp path="/sign-up" routing="path" signInUrl="/sign-in" redirectUrl="/" />
     </div>
   );
 };

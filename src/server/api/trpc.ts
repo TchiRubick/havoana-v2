@@ -17,11 +17,15 @@
  *
  */
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { getAuth, clerkClient } from "@clerk/nextjs/server";
+import type { User } from "@clerk/nextjs/api";
 
 /**
  * Replace this with an object if you want to pass things to createContextInner
  */
-type CreateContextOptions = Record<string, never>;
+type CreateContextOptions = {
+  user: User | null,
+}
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
@@ -32,8 +36,8 @@ type CreateContextOptions = Record<string, never>;
  * - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-const createInnerTRPCContext = (_opts: CreateContextOptions) => {
-  return {};
+const createInnerTRPCContext = ({ user }: CreateContextOptions) => {
+  return { user };
 };
 
 /**
@@ -41,8 +45,16 @@ const createInnerTRPCContext = (_opts: CreateContextOptions) => {
  * process every request that goes through your tRPC endpoint
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (_opts: CreateNextContextOptions) => {
-  return createInnerTRPCContext({});
+export const createTRPCContext = async (_opts: CreateNextContextOptions) => {
+  const getUser = async () => {
+    const { userId } = getAuth(_opts.req);
+    const user = userId ? await clerkClient.users.getUser(userId) : null
+    return user
+  };
+
+  const user = await getUser();
+
+  return createInnerTRPCContext({ user });
 };
 
 /**
@@ -51,7 +63,7 @@ export const createTRPCContext = (_opts: CreateNextContextOptions) => {
  * This is where the trpc api is initialized, connecting the context and
  * transformer
  */
-import { initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
@@ -68,6 +80,12 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
  * a lot in the /src/server/api/routers folder
  */
 
+const isAuthed = t.middleware(({ next, ctx }) => {
+  if (!ctx.user) throw new TRPCError({ message: 'UNAUTHORIZED', code: 'UNAUTHORIZED' });
+
+  return next({ ctx: { user: ctx.user } });
+});
+
 /**
  * This is how you create new routers and subrouters in your tRPC API
  * @see https://trpc.io/docs/router
@@ -82,3 +100,4 @@ export const createTRPCRouter = t.router;
  * can still access user session data if they are logged in
  */
 export const publicProcedure = t.procedure;
+export const protectedProcedure = t.procedure.use(isAuthed);
