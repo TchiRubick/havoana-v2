@@ -1,8 +1,9 @@
 import React from "react";
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
+import defaultImage from "../image/gamme.jpg"
 
 type objt = {
-  image: StaticImageData;
+  image: StaticImageData | null;
   name: string;
   barcode: number;
   qtt: number;
@@ -10,20 +11,20 @@ type objt = {
   prix: number;
 };
 
-const Objects: React.FC<objt> = (props) => {
+const Inventorie: React.FC<objt> = (props) => {
 
-  const { image, prix, name, barcode, qtt, cost} = props
+  const { image, prix, name, barcode, qtt, cost } = props;
   
   return(
     <div className="bg-white bg-opacity-5 rounded-lg border-2 border-slate-700 w-64 ">
       <div className="flex rounded-t-lg justify-center place-items-center">
         <div className="relative">
           <Image 
-            src={image} 
+            src={image || defaultImage} 
             alt="un objet" 
             width={267} 
-            height={80}
-            className="rounded-t-lg"
+            height={100}
+            className="rounded-t-lg w-64 h-28"
           />
         </div>
         <div className="absolute text-sm " >
@@ -52,12 +53,12 @@ const Objects: React.FC<objt> = (props) => {
         </div>
         <div className="flex space-x-5 mt-4 mb-4">
           <div>
-            <button className="btn btn-sm w-28 bg-white bg-opacity-5 hover:bg-none text-white">
+            <button className="btn btn-sm w-28 bg-white bg-opacity-5 hover:bg-none text-white hover:bg-slate-700">
               Details
             </button>
           </div>
           <div>
-            <button className="btn btn-sm w-24 bg-green-500 text-white">
+            <button className="btn btn-sm w-24 bg-green-500 text-white hover:bg-green-700">
               Buy
             </button>
           </div>
@@ -67,4 +68,4 @@ const Objects: React.FC<objt> = (props) => {
   );
 };
 
-export default Objects;
+export default Inventorie;
