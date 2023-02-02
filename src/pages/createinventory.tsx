@@ -1,6 +1,6 @@
 import React, { useState,useRef } from 'react';
 import { type NextPage } from "next";
-import { requestToBodyStream } from 'next/dist/server/body-streams';
+import ProtectedLayout from "../components/layout/ProtectedLayout";
 
 const Createinventory: NextPage = () => {
   const [barrcode, setbarcode] = useState('');
@@ -40,50 +40,52 @@ const Createinventory: NextPage = () => {
    }
   }
   
-  
+
   return (
-  <div className="  flex justify-center items-center h-screen w-screen">
-    <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
-            barcode:
-          </label>
-          <input type="text" placeholder="Type here" className="input-sm w-full max-w-xs bg-gray-200 text-gray-700 focus:bg-white rounded-full " value={barrcode}  onChange={e => setbarcode(e.target.value)}/>
-        </div>
-        <div className="w-full md:w-1/2 px-3">
+  <div>
+    <ProtectedLayout>
+    <div className="  flex justify-center items-center h-screen w-screen">
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[500px]">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="mb-4">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
+              barcode:
+            </label>
+            <input type="text" placeholder="Type here" className=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white  " value={barrcode}  onChange={e => setbarcode(e.target.value)}/>
+          </div>
+         <div>
           <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
             name:
           </label>
-          <input type="text"  placeholder="Type here" className="input-sm w-full max-w-xs bg-gray-200 text-gray-700 focus:bg-white rounded-full "  value={name} onChange={e => setname(e.target.value)}/>
-        </div>
+          <input type="text"  placeholder="Type here" className=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white  "  value={name} onChange={e => setname(e.target.value)}/>
+        </div> 
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+      <div className="grid grid-cols-3 gap-4">
+        <div className="">
           <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 " >
             cost:
           </label>
-          <input type="number" placeholder="Type here" className="input-sm w-full max-w-xs bg-gray-200 text-gray-700 focus:bg-white rounded-full " value={cost} onChange={e => setcost(e.target.value) }  onMouseUp={mousecost}   onBlur={blurcost}/>
+          <input type="number" placeholder="Type here" className=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white  " value={cost} onChange={e => setcost(e.target.value) }  onMouseUp={mousecost}   onBlur={blurcost}/>
         </div>
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+        <div className="">
           <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
             price:
           </label>
-          <input type="number" placeholder="Type here" className="input-sm w-full max-w-xs bg-gray-200 text-gray-700 focus:bg-white rounded-full " value={price} onChange={e => setprice(e.target.value)} onMouseUp={mouseprice}   onBlur={blurprice}/>
+          <input type="number" placeholder="Type here" className=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white  " value={price} onChange={e => setprice(e.target.value)} onMouseUp={mouseprice}   onBlur={blurprice}/>
         </div>
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+         <div className="">
           <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
             quantity:
           </label>
-          <input type="number" placeholder="Type here" className="input-sm w-full max-w-xs bg-gray-200 text-gray-700 focus:bg-white rounded-full" value={quantity} onChange={e => setquantity(e.target.value) } onMouseUp={mousequantity}   onBlur={blurquantity} />
-        </div>
-        <div className="pt-2 container py-10 px-10 mx-0 min-w-full ">
-          <div className="flex justify-center">
-            <button className="btn btn-info" disabled={!barrcode || !name }>Submit</button>
-          </div>
+          <input type="number" placeholder="Type here" className=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white  " value={quantity} onChange={e => setquantity(e.target.value) } onMouseUp={mousequantity}   onBlur={blurquantity} />
         </div>
       </div>
-    </div>
+      <div className="flex justify-center pt-3">
+        <button  className="btn btn-accent btn-sm  disabled:text-white disabled:bg-blue-300 rounded focus:outline-none" disabled={!barrcode || !name }>Submit</button>
+      </div>
+    </form>
+  </div>
+  </ProtectedLayout>
 </div>
   );
 };
