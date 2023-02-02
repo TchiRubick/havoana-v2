@@ -2,6 +2,8 @@ import React, { type ReactNode } from "react";
 import Link from "next/link";
 import { UserButton } from "@clerk/clerk-react";
 import { FaCashRegister, FaChartLine, FaList } from "react-icons/fa";
+import logo from '../../assets/images/logo-small-white.png';
+import Image from "next/image";
 
 type tProps = {
   children: ReactNode;
@@ -35,19 +37,10 @@ const ProtectedLayout: React.FC<tProps> = ({ children }) => {
   ));
 
   return (
-    <div className="relative min-h-screen">
-      <nav className="flex flex-wrap justify-between p-4">
-        <div className="mr-6 flex items-center text-white">
-          <svg
-            className="mr-2 h-8 w-8 fill-current"
-            width="54"
-            height="54"
-            viewBox="0 0 54 54"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-          </svg>
-          <span className="text-xl font-semibold tracking-tight">Noushop</span>
+    <div className="relative min-h-screen h-full w-full min-w-screen box-border">
+      <nav className="flex flex-wrap sm:flex-nowrap justify-between p-4">
+        <div className="flex items-center justify-start sm:w-48">
+          <Image src={logo} alt="logo" width={192} height={192} />
         </div>
         <div className="block sm:hidden">
           <div className="flex">
@@ -69,11 +62,11 @@ const ProtectedLayout: React.FC<tProps> = ({ children }) => {
             {renderMenus()}
           </div>
         </div>
-        <div className="hidden sm:block">
+        <div className="hidden sm:w-48 sm:flex justify-end">
           <UserButton />
         </div>
       </nav>
-      <main className="container">{children}</main>
+      <main className="container p-6 mx-auto">{children}</main>
       <div className="absolute bottom-1 left-1">copyright 2023</div>
     </div>
   );

@@ -38,7 +38,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   return (
     <ClerkProvider {...pageProps}>
-      <div data-theme="dark">
+      <div className='_app'>
         {renderPage()}
       </div>
     </ClerkProvider>
