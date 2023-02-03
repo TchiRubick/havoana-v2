@@ -6,6 +6,7 @@ import {
   SignedOut,
   RedirectToSignIn,
 } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 import { useRouter } from "next/router";
 
@@ -37,10 +38,20 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   };
 
   return (
-    <ClerkProvider {...pageProps}>
-      <div className='_app'>
-        {renderPage()}
-      </div>
+    <ClerkProvider
+      {...pageProps}
+      appearance={{
+        baseTheme: dark,
+        variables: {
+          colorPrimary: '#0B2B51'
+        },
+        layout: {
+          socialButtonsVariant: 'iconButton',
+          socialButtonsPlacement: 'bottom'
+        }
+      }}
+    >
+      <div className="_app">{renderPage()}</div>
     </ClerkProvider>
   );
 };

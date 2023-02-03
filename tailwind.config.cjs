@@ -17,6 +17,7 @@ module.exports = {
           success: "#138496",
           warning: "#F9F871",
           error: "#9D2F47",
+          'custom-bg': "#19191A"
         },
       },
     ],

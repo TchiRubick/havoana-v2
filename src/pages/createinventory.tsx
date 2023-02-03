@@ -42,7 +42,7 @@ const Createinventory: NextPage = () => {
   return (
     <ProtectedLayout>
       <div className="flex items-center justify-center h-full mt-10">
-        <form className="mb-4 max-w-md bg-white/90 px-8 py-10 shadow-md rounded-lg">
+        <form className="mb-4 max-w-md bg-[#19191A] px-8 py-10 shadow-md rounded-lg">
           <div className="grid grid-cols-2 gap-3">
             <div className="mb-4">
               <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-neutral">

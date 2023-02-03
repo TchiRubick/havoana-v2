@@ -21,6 +21,7 @@ const menus = [
     icon: <FaCashRegister className="pr-1" />,
   },
   { link: "#sales", text: "Sales", icon: <FaChartLine className="pr-1" /> },
+  { link: "organization-profile", text: "Organization", icon: <FaChartLine className="pr-1" /> },
 ];
 
 const ProtectedLayout: React.FC<tProps> = ({ children }) => {
