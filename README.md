@@ -1,28 +1,33 @@
-# Create T3 App
+## How to use prisma?
+Install:
+npx prisma
+npm install @prisma/client  
+npx prisma init  
+npx prisma db push
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## How to use planetscale?
+Open https://scoop.sh/
+Open and enter in powershell and install:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+irm get.scoop.sh | iex
+After close the powershell
+Open cmd and install:
+scoop bucket add pscale https://github.com/planetscale/scoop-bucket.git
+scoop install pscale mysql
+pscale auth login
+pscale org switch h2
+pscale connect h2 dev --port 3309
 
-## What's next? How do I make an app with this?
+In .env
+DATABASE_URL="mysql://root@127.0.0.1:3309/prisma-playground"
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Modify 
+In terminal project run 
+npx prisma db push
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
 
-## Learn More
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
