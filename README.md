@@ -1,11 +1,7 @@
 ## How to install prisma?
 -**Install in terminal:**
 ```
-npx prisma
-
-npm install @prisma/client
-
-npx prisma init
+mpm install
 
 ``` 
 
