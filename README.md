@@ -19,9 +19,9 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a 
 
 irm get.scoop.sh | iex
 
-After close the powershell
-
 ```
+
+After close the powershell
 
 -**Open cmd and install:**
 
