@@ -1,4 +1,4 @@
-## How to install package?
+## How to install a package?
 -**Install in terminal:**
 ```
 mpm install
