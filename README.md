@@ -10,7 +10,8 @@ npx prisma init
 ``` 
 
 ## How to install planetscale?
--Open and enter in powershell and install:
+
+-**Open and enter in powershell and install:**
 
 ```
 
