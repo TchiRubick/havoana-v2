@@ -1,5 +1,5 @@
 ## How to install prisma?
-Install:
+-**Install in terminal:**
 ```
 npx prisma
 
@@ -11,7 +11,7 @@ npx prisma init
 
 ## How to install planetscale?
 
--**Open and enter in powershell and install:**
+-**Open in powershell and install:**
 
 ```
 
@@ -45,8 +45,6 @@ pscale connect h2 dev --port 3309
 DATABASE_URL="mysql://root@127.0.0.1:3309/prisma-playground"
 
 ```
-
--**Modify** 
 
 In terminal:
 
