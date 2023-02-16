@@ -10,13 +10,22 @@ const Createinventory: NextPage = () => {
   const [price, setprice] = useState(0);
   const [quantity, setquantity] = useState(0);
 
-  const blurquantity = () => {
-    setquantity(0);
+  const blurquantity = (e:any) => {
+    if(quantity===0){
+      setquantity(0);
+    }
+    if(quantity <0 || quantity>0){
+        setquantity(e.target.valueAsNumber);
+    }else{
+      setquantity(0);
+    }
+    
   };
 
   const mousequantity = () => {
     if (quantity === 0) {
-      setquantity(parseInt(" "));
+      
+      setquantity(parseInt(""));
     }
   };
 
@@ -26,7 +35,7 @@ const Createinventory: NextPage = () => {
 
   const mouseprice = () => {
     if (price === 0) {
-      setprice(parseInt(" "));
+      setprice(parseInt(""));
     }
   };
 
@@ -36,11 +45,11 @@ const Createinventory: NextPage = () => {
 
   const mousecost = () => {
     if (cost === 0) {
-      setcost(parseInt(" "));
+      setcost(parseInt(""));
     }
   };
 
-  const { mutateAsync, isLoading } = api.inventoryRoot.invent.useMutation();
+  const { mutateAsync, isLoading } = api.inventory.invent.useMutation();
 
   const inventory = async () => {
     
