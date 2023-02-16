@@ -1,59 +1,62 @@
 import React, { useState } from "react";
 import { type NextPage } from "next";
 import ProtectedLayout from "../components/layout/ProtectedLayout";
+import { trpc } from '../utils/trpc';
 import { api } from "../utils/api";
-
 const Createinventory: NextPage = () => {
+  
+  
   const [barrcode, setbarcode] = useState("");
   const [name, setname] = useState("");
-  const [cost, setcost] = useState(0);
-  const [price, setprice] = useState(0);
-  const [quantity, setquantity] = useState(0);
-
+  const [cost, setcost] = useState("0");
+  const [price, setprice] = useState("0");
+  const [quantity, setquantity] = useState("0");
+  
+  
   const blurquantity = () => {
-    setquantity(0);
+    setquantity("0");
   };
 
-  const mousequantity = () => {
-    if (quantity === 0) {
-      setquantity(parseInt(" "));
+  const mousequantity = (e:any) => {
+    if (quantity === "0") {
+      setquantity("");
+    }else{
+      setquantity(e.target.value);
     }
   };
 
   const blurprice = () => {
-    setprice(0);
+    setprice("0");
   };
 
   const mouseprice = () => {
-    if (price === 0) {
-      setprice(parseInt(" "));
+    if (price === "0") {
+      setprice("");
     }
   };
 
   const blurcost = () => {
-    setcost(0);
+    setcost("0");
   };
-
+  
+  
   const mousecost = () => {
-    if (cost === 0) {
-      setcost(parseInt(" "));
-    }
-  };
-
-  const { mutateAsync, isLoading } = api.inventoryRoot.invent.useMutation();
-
-  const inventory = async () => {
-    
-    const invent = await mutateAsync({ name,barrcode,cost,price,quantity});
-
+    if (cost === "0") {
+      setcost("");
+    };
   }
 
-
+  
+  const mutation = trpc.useMutation(['']);
+  const handleLogin = async () => {
+  console.log(  mutation.mutate({ barrcode,name,cost,price,quantity }));
+  };
 
   return (
     <ProtectedLayout>
-      <div className="flex items-center justify-center h-full mt-10">
-        <div className="mb-4 max-w-md bg-[#19191A] px-8 py-10 shadow-md rounded-lg">
+
+<div className="flex items-center justify-center h-full mt-10">
+        <form className="mb-4 max-w-md bg-[#19191A] px-8 py-10 shadow-md rounded-lg">
           <div className="grid grid-cols-2 gap-3">
             <div className="mb-4">
               <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-neutral">
@@ -90,7 +93,7 @@ const Createinventory: NextPage = () => {
                 placeholder="Type here"
                 className="input input-bordered input-sm w-full max-w-xs"
                 value={cost}
-                onChange={(e) => setcost(e.target.valueAsNumber)}
+                onChange={(e) => setcost(e.target.value)}
                 onMouseUp={mousecost}
                 onBlur={blurcost}
               />
@@ -104,7 +107,7 @@ const Createinventory: NextPage = () => {
                 placeholder="Type here"
                 className="input input-bordered input-sm w-full max-w-xs"
                 value={price}
-                onChange={(e) => setprice(e.target.valueAsNumber)}
+                onChange={(e) => setprice(e.target.value)}
                 onMouseUp={mouseprice}
                 onBlur={blurprice}
               />
@@ -118,7 +121,7 @@ const Createinventory: NextPage = () => {
                 placeholder="Type here"
                 className="input input-bordered input-sm w-full max-w-xs"
                 value={quantity}
-                onChange={(e) => setquantity(e.target.valueAsNumber)}
+                onChange={(e) => setquantity(e.target.value)}
                 onMouseUp={mousequantity}
                 onBlur={blurquantity}
               />
@@ -128,14 +131,21 @@ const Createinventory: NextPage = () => {
             <button
               className="btn-accent btn-sm btn w-32  rounded focus:outline-none"
               disabled={!barrcode || !name}
-              onClick={inventory}
-              type={"button"}
+              onClick={handleLogin}
             >
               Submit
             </button>
           </div>
-        </div>
+        </form>
       </div>
+     
+     <h1 className="text-slate-200">Login Form</h1>
+      <button className="text-slate-200" onClick={handleLogin} >
+        Login
+      </button>
+     
+
+
     </ProtectedLayout>
   );
 };

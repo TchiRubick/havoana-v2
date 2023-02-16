@@ -8,5 +8,8 @@ export const testRouter = createTRPCRouter({
   greeting: publicProcedure
     .input(z.object({ name: z.string() }))
     .query(({ input }) => testService(input.name)),
+    greet: publicProcedure
+    .input(z.object({ name: z.string() }))
+    .mutation(({ input }) => testService(input.name)),
 });
 
