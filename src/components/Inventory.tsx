@@ -1,24 +1,24 @@
 import React from "react";
+import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
 import defaultImage from "../image/gamme.jpg"
 
-type objt = {
+type tProps = {
   image: StaticImageData | null;
   name: string;
   barcode: number;
   qtt: number;
   cost: number;
-  prix: number;
+  price: number;
 };
 
-const Inventorie: React.FC<objt> = (props) => {
-
-  const { image, prix, name, barcode, qtt, cost } = props;
+const Inventory: React.FC<tProps> = (props) => {
+  const { image, price, name, barcode, qtt, cost } = props;
   
   return(
     <div className="bg-white bg-opacity-5 rounded-lg border-2 border-slate-700 w-64 ">
       <div className="flex rounded-t-lg justify-center place-items-center">
-        <div className="relative">
+        <div className="relative opacity-60">
           <Image 
             src={image || defaultImage} 
             alt="un objet" 
@@ -29,7 +29,7 @@ const Inventorie: React.FC<objt> = (props) => {
         </div>
         <div className="absolute text-sm " >
           <span className="text-white font-bold">
-            {name} - {prix} Ar
+            {name} - {price} Ar
           </span>
         </div>
       </div>
@@ -53,9 +53,10 @@ const Inventorie: React.FC<objt> = (props) => {
         </div>
         <div className="flex space-x-5 mt-4 mb-4">
           <div>
-            <button className="btn btn-sm w-28 bg-white bg-opacity-5 hover:bg-none text-white hover:bg-slate-700">
+            <Link className="btn btn-sm w-28 bg-white bg-opacity-5 hover:bg-none text-white hover:bg-slate-700" 
+              href={"#"}>
               Details
-            </button>
+            </Link>
           </div>
           <div>
             <button className="btn btn-sm w-24 bg-green-500 text-white hover:bg-green-700">
@@ -68,4 +69,4 @@ const Inventorie: React.FC<objt> = (props) => {
   );
 };
 
-export default Inventorie;
+export default Inventory;

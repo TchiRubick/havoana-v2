@@ -3,39 +3,25 @@ import { type NextPage } from "next";
 import { FcSearch } from "react-icons/fc";
 import { HiPlus } from "react-icons/Hi";
 import ProtectedLayout from "../components/layout/ProtectedLayout";
-import Inventorie from "../components/Inventorie"
-import raisin from "../image/raisin.jpg"
-import pomme from "../image/pomme.jpg"
+import Inventory from "../components/Inventory";
 
-const objt = [
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin}, 
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: pomme},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: null},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: null},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-  {name: 'Raisin', prix: 45666, barcode: 185554545, qtt: 17, cost: 19566, img: raisin},
-];
+import { api } from "../utils/api";
 
 const Inventories: NextPage = () => {
+  const { data, isLoading } = api.inventory.getList.useQuery();
 
-  const renderInventories = objt.map((list) => (
-    <div className="w-64" key={list.name}>
-      <Inventorie
+  const renderInventories = data?.map((list) => (
+    <div className="w-64" key={list.barcode}>
+      <Inventory
         name = {list.name}
-        prix={list.prix}
+        price={list.price}
         barcode = {list.barcode}
         qtt = {list.qtt}
         cost = {list.cost}
         image={list.img}
       />
     </div>
-  ))
+  ));
 
   return(
     <ProtectedLayout>
@@ -68,7 +54,7 @@ const Inventories: NextPage = () => {
             </div>
           </div>
           <div className="grid grid-cols-3 gap-x-16 gap-y-3 mx-52">
-            {renderInventories}
+            {isLoading ? 'Loading...' : renderInventories}
           </div>
         </div>
         <div className="btn-group flex justify-center mt-4">
