@@ -11,7 +11,7 @@ type tProps = {
 
 const menus = [
   {
-    link: "#inventories",
+    link: "/inventories",
     text: "Inventories",
     icon: <FaList className="pr-1" />,
   },
