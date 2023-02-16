@@ -12,6 +12,7 @@ export const appRouter = createTRPCRouter({
   example: exampleRouter,
   inventory: inventoryRouter,
   test: testRouter,
+  inventoryRoot: inventoryRouter,
 });
 
 // export type definition of API
