@@ -29,7 +29,7 @@ const ProtectedLayout: React.FC<tProps> = ({ children }) => {
     <Link
       key={menu.link}
       href={menu.link}
-      className="mt-4 mr-4 block text-slate-50 hover:text-slate-200 sm:mt-0 sm:inline-block"
+      className="text-slate-50 hover:text-blue-500"
     >
       <div className="flex items-center">
         {menu.icon}{menu.text}
@@ -58,15 +58,15 @@ const ProtectedLayout: React.FC<tProps> = ({ children }) => {
             <UserButton />
           </div>
         </div>
-        <div className="hidden w-full sm:flex sm:w-auto sm:items-center">
-          <div className="text-sm sm:flex-grow">
-            {renderMenus()}
-          </div>
-        </div>
         <div className="hidden sm:w-48 sm:flex justify-end">
           <UserButton />
         </div>
       </nav>
+      <div className="menu  w-56  rounded-box pl-4">
+          <div className="text-sm sm:flex-grow leading-7">
+            {renderMenus()}
+          </div>
+        </div>
       <main className="container p-6 mx-auto">{children}</main>
       <div className="absolute bottom-1 left-1">copyright 2023</div>
     </div>

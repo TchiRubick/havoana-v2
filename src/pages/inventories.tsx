@@ -2,10 +2,10 @@ import React from "react";
 import { type NextPage } from "next";
 import { FcSearch } from "react-icons/fc";
 import { HiPlus } from "react-icons/Hi";
+import { api } from "../utils/api";
 import ProtectedLayout from "../components/layout/ProtectedLayout";
 import Inventory from "../components/Inventory";
 
-import { api } from "../utils/api";
 
 const Inventories: NextPage = () => {
   const { data, isLoading } = api.inventory.getList.useQuery();

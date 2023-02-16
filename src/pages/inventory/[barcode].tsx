@@ -17,12 +17,12 @@ type tProps = {
 const barcode: NextPage<tProps> = (props) => {
   const { barcode } = props;
  
-  const { data, isLoading } = api.inventory.findOneByBarcode.useQuery();
+  const { isLoading } = api.inventory.getBarcode.useQuery();
 
   return(
     <div className="h-full min-h-screen">
       <span className="text-white">
-        {isLoading ? "Loading...": barcode }
+        {isLoading? 'Loading...': barcode }
       </span>
     </div>
   );

@@ -8,6 +8,11 @@ export const inventoryRouter = createTRPCRouter(
   {
     getList: protectedProcedure
       .query(() => getInventories()),
+      
+    getBarcode: protectedProcedure
+      .input(z.object({ barcode: z.number() }))
+      .query(({ input }) => getInventoryByBarcode(input.barcode)),
   },
+
 )
     
