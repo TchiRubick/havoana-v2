@@ -19,7 +19,7 @@ model Post {
 
 model Inventory {
   id Int @default(autoincrement()) @id
-  barrcode Int @unique
+  barrcode String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String    

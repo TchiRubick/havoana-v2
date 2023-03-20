@@ -9,6 +9,8 @@ const Createinventory: NextPage = () => {
   const [cost, setcost] = useState(0);
   const [price, setprice] = useState(0);
   const [quantity, setquantity] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [succesMessage, setsuccesMessage] = useState("");
 
   const blurquantity = (e:any) => {
     if(quantity===0){
@@ -29,8 +31,15 @@ const Createinventory: NextPage = () => {
     }
   };
 
-  const blurprice = () => {
-    setprice(0);
+  const blurprice = (e:any) => {
+    if(price===0){
+      setprice(0);
+    }
+    if(price <0 || price>0){
+        setprice(e.target.valueAsNumber);
+    }else{
+      setprice(0);
+    }
   };
 
   const mouseprice = () => {
@@ -39,8 +48,15 @@ const Createinventory: NextPage = () => {
     }
   };
 
-  const blurcost = () => {
-    setcost(0);
+  const blurcost = (e:any) => {
+    if(cost===0){
+      setcost(0);
+    }
+    if(cost <0 || cost>0){
+        setcost(e.target.valueAsNumber);
+    }else{
+      setcost(0);
+    }
   };
 
   const mousecost = () => {
@@ -51,10 +67,21 @@ const Createinventory: NextPage = () => {
 
   const { mutateAsync, isLoading } = api.inventory.invent.useMutation();
 
-  const inventory = async () => {
-    
-    const invent = await mutateAsync({ name,barrcode,cost,price,quantity});
 
+
+  const inventory = async () => {
+    try{
+      const invent = await mutateAsync({ name,barrcode,cost,price,quantity});
+      setsuccesMessage("Succes");
+      setErrorMessage('');
+    }
+
+    catch{
+      setErrorMessage("Error, barcode is unique");
+      setsuccesMessage("");
+    }
+    
+     
   }
 
 
@@ -63,6 +90,10 @@ const Createinventory: NextPage = () => {
     <ProtectedLayout>
       <div className="flex items-center justify-center h-full mt-10">
         <div className="mb-4 max-w-md bg-[#19191A] px-8 py-10 shadow-md rounded-lg">
+        <div>
+          <div className="text-red-500">{errorMessage}</div>
+          <div className="text-blue-800">{succesMessage}</div>
+        </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="mb-4">
               <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-neutral">
@@ -137,7 +168,7 @@ const Createinventory: NextPage = () => {
             <button
               className="btn-accent btn-sm btn w-32  rounded focus:outline-none"
               disabled={!barrcode || !name}
-              onClick={inventory}
+              onClick={inventory} 
               type={"button"}
             >
               Submit

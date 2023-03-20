@@ -4,7 +4,9 @@ import getInventoryByBarcode from "../../../services/inventory/getInventoryByBar
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
-import inventoryService from "../../../services/test/inventoryService";
+import inventoryService from "../../../services/inventory/inventoryService";
+
+import getDatabase from "../../../services/inventory/getDatabase";
 
 export const inventoryRouter = createTRPCRouter(
   {
@@ -20,6 +22,10 @@ export const inventoryRouter = createTRPCRouter(
                         price: z.number(),cost: z.number(),quantity: z.number() }))
       .mutation(({ input }) => inventoryService(input.name, input.barrcode,
                                                 input.price, input.cost, input.quantity)),
+    getData: protectedProcedure
+       .query(() => getDatabase()),
+
+        
   },
 
   

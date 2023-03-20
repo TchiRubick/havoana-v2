@@ -5,6 +5,7 @@ import { HiPlus } from "react-icons/Hi";
 import { api } from "../utils/api";
 import ProtectedLayout from "../components/layout/ProtectedLayout";
 import Inventory from "../components/Inventory";
+import Link from 'next/link';
 
 
 const Inventories: NextPage = () => {
@@ -47,9 +48,11 @@ const Inventories: NextPage = () => {
             </div>
             <div>
               <div>
+                <Link href="/createinventory">
                 <button className="btn">
                   <HiPlus className="pr-1"/> Creat Inventory
                 </button>
+                </Link>
               </div>
             </div>
           </div>
