@@ -9,14 +9,14 @@ const Cashier: NextPage = () => {
   
 
   const { data } = api.inventory.getData.useQuery();
-let b  = String(data);
+
   
 
 
   return (
     <ProtectedLayout>
     <div className="">
-      {b}
+      {data?.toString()}
     </div>
     </ProtectedLayout>
   );
