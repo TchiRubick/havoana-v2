@@ -2,18 +2,19 @@ import React from "react";
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
 import defaultImage from "../image/gamme.jpg"
+import { Decimal } from "@prisma/client/runtime";
 
 type tProps = {
   image: StaticImageData | null;
   name: string;
-  barcode: number;
-  qtt: number;
-  cost: number;
-  price: number;
+  barrcode: string;
+  quantity: Decimal;
+  cost: Decimal;
+  price: Decimal;
 };
 
 const Inventory: React.FC<tProps> = (props) => {
-  const { image, price, name, barcode, qtt, cost } = props;
+  const { image, price, name, barrcode, quantity, cost } = props;
   
   return(
     <div className="bg-white bg-opacity-5 rounded-lg border-2 border-slate-700 w-64 ">
@@ -37,12 +38,12 @@ const Inventory: React.FC<tProps> = (props) => {
         <div className="text-xs">
           <div>
             <label>
-              {barcode}
+              {barrcode}
             </label>
           </div>
           <div>
             <label>
-              Qtt: {qtt}
+              Qtt: {quantity}
             </label>
           </div>
           <div>

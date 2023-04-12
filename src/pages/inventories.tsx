@@ -12,14 +12,14 @@ const Inventories: NextPage = () => {
   const { data, isLoading } = api.inventory.getList.useQuery();
 
   const renderInventories = data?.map((list) => (
-    <div className="w-64" key={list.barcode}>
+    <div className="w-64" key={list.barrcode}>
       <Inventory
         name = {list.name}
         price={list.price}
-        barcode = {list.barcode}
-        qtt = {list.qtt}
+        barrcode = {list.barrcode}
+        quantity = {list.quantity}
         cost = {list.cost}
-        image={list.img}
+        i
       />
     </div>
   ));
