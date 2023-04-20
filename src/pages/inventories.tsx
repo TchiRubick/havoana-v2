@@ -19,7 +19,6 @@ const Inventories: NextPage = () => {
         barrcode = {list.barrcode}
         quantity = {list.quantity}
         cost = {list.cost}
-        i
       />
     </div>
   ));

@@ -5,7 +5,6 @@ import defaultImage from "../image/gamme.jpg"
 import { Decimal } from "@prisma/client/runtime";
 
 type tProps = {
-  image: StaticImageData | null;
   name: string;
   barrcode: string;
   quantity: Decimal;
@@ -14,19 +13,12 @@ type tProps = {
 };
 
 const Inventory: React.FC<tProps> = (props) => {
-  const { image, price, name, barrcode, quantity, cost } = props;
+  const { price, name, barrcode, quantity, cost } = props;
   
   return(
     <div className="bg-white bg-opacity-5 rounded-lg border-2 border-slate-700 w-64 ">
       <div className="flex rounded-t-lg justify-center place-items-center">
         <div className="relative opacity-60">
-          <Image 
-            src={image || defaultImage} 
-            alt="un objet" 
-            width={267} 
-            height={100}
-            className="rounded-t-lg w-64 h-28"
-          />
         </div>
         <div className="absolute text-sm " >
           <span className="text-white font-bold">
@@ -55,7 +47,13 @@ const Inventory: React.FC<tProps> = (props) => {
         <div className="flex space-x-5 mt-4 mb-4">
           <div>
             <Link className="btn btn-sm w-28 bg-white bg-opacity-5 hover:bg-none text-white hover:bg-slate-700" 
-              href={"#"}>
+               href={{
+                pathname: '/inventory/[barrcode]',
+                query: {barrcode}
+              }}
+              
+              >
+          
               Details
             </Link>
           </div>
